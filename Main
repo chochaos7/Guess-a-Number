@@ -1,0 +1,91 @@
+import random
+import sys
+from time import sleep
+total_points = 20
+total_guess = 3
+actual_guess = 0
+ending = "\nOh dear. The answer was"
+ending1 = "Better luck next time"
+ending2 = "\nWow. You got it on the first try\nTime to head to VEGAS!!"
+ending3 = "\nNice job. Your instincts were right"
+random_num = random.randint(1, 20)
+print("You have 3 chances to guess a random number from 1-20 \n")
+print("Here is your first of three hints\n")
+
+if random_num > 10:
+    print("The number is between 11-20 \n")
+else:
+    print("The number is between 1-10 \n")
+while True:
+    number = input("What is your guess? ")
+    try:
+        actual_guess = int(number)
+        if actual_guess < 0:
+            print("Sorry, you must use a positive number")
+            continue
+        break
+    except ValueError:
+        print("That's just silly")
+
+while total_guess > 0:
+    if actual_guess == random_num:
+        if total_guess == 3:
+            for char in ending2:
+                sleep(0.045)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+        else:
+            for char in ending3:
+                sleep(0.045)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+        break
+    else:
+        total_guess -= 1
+        if total_guess == 2:
+            print("\nClose, but now you have", total_guess, "guesses left")
+            print("\nHint number 2")
+            if (random_num % 3) == 0:
+                print("The number is divisible by 3")
+            else:
+                print("The number is not divisible by 3")            
+            while True:
+                number = input("\nWhat is your guess? ")
+                try:
+                    actual_guess = int(number)
+                    if actual_guess < 0:
+                        print("Sorry, you must use a positive number")
+                        continue
+                    break
+                except ValueError:
+                    print("That's just silly")
+        elif total_guess == 1:
+            print("\nClose, but now you have", total_guess, "guess left")
+            print("\nHere's your last hint")
+            if (random_num % 2) ==0:                
+                print("It's an even number")
+            else:
+                print("It's an odd number")
+            while True:
+                number = input("\nWhat is your guess? ")
+                try:
+                    actual_guess = int(number)
+                    if actual_guess < 0:
+                        print("Sorry, you must use a positive number")
+                        continue
+                    break
+                except ValueError:
+                    print("That's just silly")
+        else:
+            print("\n")
+            for char in ending:
+                sleep(0.045)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("", random_num)
+            for char in ending1:
+                sleep(0.045)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            
+    
